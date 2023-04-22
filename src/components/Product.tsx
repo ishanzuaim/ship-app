@@ -7,9 +7,8 @@ type Props = {
 };
 function Product({ description, image, id }: Props) {
   return (
-    <div>
+    <div className="border-[1px] border-black w-64">
       <Image
-        className="border-[1px] border-black w-[400px]"
         alt=""
         src={`https://picsum.photos/id/${id}/400`}
         width={200}

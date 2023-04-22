@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { IoCartOutline } from "react-icons/io5";
 function Heading() {
   return (
     <div className="flex px-10 py-2 justify-between">
@@ -11,9 +11,9 @@ function Heading() {
         </Link>
       </div>
       <div className="flex text-[13px] items-center gap-4">
-        <div>Bag(3)</div>
-        <div>US($)</div>
-        <div>English</div>
+        <div className="flex">
+          <IoCartOutline size={25} />0
+        </div>
       </div>
     </div>
   );

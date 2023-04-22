@@ -5,30 +5,20 @@ import Layout from "@/components/Layout";
 import Head from "next/head";
 import getData from "@/utils/data";
 import Product from "@/components/Product";
+import { ProductGroup } from "@/utils/types";
 
-interface Product {
-  image: string;
-  description: string;
-}
-
-interface ItemData {
-  id: number;
-  name: string;
-  products: Array<Product>;
-}
 type Props = {
-  itemData: ItemData;
+  productGroup: ProductGroup;
 };
-function Products({ itemData }: Props) {
-  const { id, name, products } = itemData;
+function Products({ productGroup }: Props) {
+  const { id, name, products } = productGroup;
   return (
     <Layout id={id}>
       <Head>
         <title>{name}</title>
       </Head>
-      <div>{name}</div>
-      <div className="grid grid-cols-4 gap-4">
-        {products.map((product, key) => {
+      <div className="grid grid-cols-repeat4 gap-4">
+        {products?.map((product, key) => {
           return <Product {...product} key={key} />;
         })}
       </div>
@@ -52,9 +42,18 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as Params;
-  const itemData = getData().find((i) => i.id == +id);
+  const response = await fetch("http://localhost:3000/api/data");
+  let data = [];
+  try {
+    data = await response.json();
+    console.log(data);
+  } catch (e) {
+    console.log(e);
+  }
   return {
-    props: { itemData },
+    props: {
+      productGroup: data.find((d: ProductGroup) => d.id === +id) ?? {},
+    },
   };
 };
 export default Products;
