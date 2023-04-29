@@ -2,7 +2,10 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
-function Heading() {
+type Props = {
+  cart: Array<Number>;
+};
+function Heading({ cart }: Props) {
   return (
     <div className="flex px-10 py-2 justify-between">
       <div className="flex">
@@ -11,9 +14,12 @@ function Heading() {
         </Link>
       </div>
       <div className="flex text-[13px] items-center gap-4">
-        <div className="flex">
-          <IoCartOutline size={25} />0
-        </div>
+        <Link href="/cart">
+          <div className="flex">
+            <IoCartOutline size={25} />
+            {cart?.length}
+          </div>
+        </Link>
       </div>
     </div>
   );

@@ -42,11 +42,10 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as Params;
-  const response = await fetch("http://localhost:3000/api/data");
+  const response = await fetch("http://localhost:3000/api/items");
   let data = [];
   try {
     data = await response.json();
-    console.log(data);
   } catch (e) {
     console.log(e);
   }
