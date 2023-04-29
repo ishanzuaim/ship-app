@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { ProductGroup } from "@/utils/types";
 
 const cart: Array<Number> = [];
 
